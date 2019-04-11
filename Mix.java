@@ -6,7 +6,7 @@ public class Mix {
 
 	private LinkedList<Character> message;
 	private String undoCommands;
-	private Hashtable<Integer, String> clipBoards;
+	private Hashtable<Integer, Character> clipBoards;
 
 	private String userMessage;
 	private Scanner scan;
@@ -111,7 +111,6 @@ public class Mix {
 				undoCommands = currUndoCommands;
 				message = currMessage;
 			}
-
 		} while (true);
 	}
 
@@ -136,6 +135,11 @@ public class Mix {
 		//fixme:
 	}
 
+	/**
+	 * Replaces the char requested to a new one that is also requested
+	 * @param remove
+	 * @param placeholder
+	 */
 	private void replace(String remove, String placeholder) {
 		if(remove.length() > 1 || placeholder.length() > 1) {
 			throw new IllegalArgumentException();
@@ -151,27 +155,50 @@ public class Mix {
 		}
 	}
 
+	/**
+	 * Removes all characters from start to stop
+	 * @param start
+	 * @param stop
+	 */
 	private void remove(int start, int stop) {
 		for(int i = 0; i <= stop - start; i++) {
 			message.remove(start + i);
 		}
 	}
 
+	/**
+	 * Takes a sequence of chars, places them in the hashtable, and removes the sequence
+	 * from the message
+	 * @param start
+	 * @param stop
+	 * @param clipNum
+	 */
 	private void cut(int start, int stop, int clipNum) {
 		for(int i = start; i <= stop; i++) {
-			clipBoards.put(clipNum, message.);
+			clipBoards.put(clipNum, message.get(i));
 		}
 		for(int i = start; i <= stop; i++) {
 			message.remove(start);
 		}
 	}
 
+	/**
+	 * Copies the requested range (start to stop) and records it in the hash table
+	 * @param start
+	 * @param stop
+	 * @param clipNum
+	 */
 	private void copy(int start, int stop, int clipNum) {
 		for(int i = start; i <= stop; i++) {
 			clipBoards.put(clipNum, message.get(i));
 		}
 	}
 
+	/**************************************************
+	 * Places what you have for the given hashtable key
+	 * @param index
+	 * @param clipNum
+	 *************************************************/
 	private void paste( int index, int clipNum) {
 
 	}
@@ -185,6 +212,9 @@ public class Mix {
 		}
 	}
 
+	/**
+	 * Prints the message you typed in main
+	 */
 	private void DisplayMessage() {
 		System.out.print ("Message:\n");
 		//userMessage = message.toString();
@@ -197,6 +227,10 @@ public class Mix {
 		System.out.format ("\n");
 	}
 
+	/**********************************************************
+	 * Saves the message, with all augments included
+	 * @param filename (the name you want the file to be named)
+	 *********************************************************/
 	public void save(String filename) {
 
 		PrintWriter out = null;
@@ -211,6 +245,9 @@ public class Mix {
 		out.close();
 	}
 
+	/***********************************************************************************************
+	 * A method that prints information on the commands we have for the application and what they do
+	 **********************************************************************************************/
 	private void helpPage() {
 		System.out.println("Commands:");
 		System.out.println("\tQ filename	means, quit! " + " save to filename" );			
