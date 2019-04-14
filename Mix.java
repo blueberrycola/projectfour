@@ -63,7 +63,7 @@ public class Mix {
 				case "Q":
 					save(scan.next());
 					System.out.println ("Final mixed up message: \"" + formatLL(message.toString())+"\"");
-					//fixme: Print command instructions for unmix.java
+
 					System.exit(0);
 				case "b":
 					insertbefore(scan.next(), scan.nextInt());
@@ -144,7 +144,7 @@ public class Mix {
 	 * should do (1 to 4) countChar is excluded since it isnt useful for unmix.
 	 *****************************************************************************/
 	private void spazCommand(){
-		//fixme: spazCommand()
+
 		Random rng = new Random();
 		//ASCII_RANDOM: generates a random char decimal between hex values 32 to 126
 		int ASCII_RANDOM = rng.nextInt(126 - 32) + 32;
@@ -331,8 +331,8 @@ public class Mix {
 	 *****************************************************************************/
 	private void paste( int index, int clipNum) {
 		//LAZY MODE ACTIVATE:
-		commandMemory.add("p" + " " + index);
 		insertbefore(clipBoards.get(clipNum), index);
+
 
 	}
          
@@ -341,11 +341,9 @@ public class Mix {
 		for(int i = 0; i < token.length(); i++) {
 			message.add(index, token.charAt(token.length() - 1 - i));
 		}
-		if(commandMemory.get(commandMemory.size() - 1).charAt(0) == 'p') {
+		commandMemory.add("b '" + token + "' " + index);
 
-		}else {
-			commandMemory.add("b '" + token + "' " + index);
-		}
+
 
 		//unmix instructions remove inserted
 	}
@@ -405,8 +403,8 @@ public class Mix {
 	 * @param filename (the name you want the file to be named)
 	 *********************************************************/
 	public void save(String filename) {
-		//FIXME: save() needs to store commands in filename so it can be unmixed
-		//FIXME: save() needs to refactor out of linkedlist.toString()
+
+
 		PrintWriter out = null;
 		try {
 			out = new PrintWriter(new BufferedWriter(new FileWriter(filename)));
